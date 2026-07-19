@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CATCO Energy Solutions - Sustainable Energy. Smarter Tomorrow.</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>CATCO Energy Solutions</title>
     <style>
+        /* Global Styles */
         :root {
             --primary-color: #4CAF50;
             --secondary-color: #ffffff;
             --text-color: #333333;
-            --light-gray: #f5f5f5;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --light-shadow: rgba(0, 0, 0, 0.1);
+            --transition-time: 0.4s;
         }
 
         * {
@@ -23,815 +21,192 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Arial', sans-serif;
             color: var(--text-color);
-            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Navigation */
-        nav {
+        /* Loader Animation */
+        .loader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: var(--secondary-color);
-            box-shadow: var(--shadow);
-            z-index: 1000;
-            padding: 15px 0;
-            transition: var(--transition);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-        }
-
-        .btn-primary:hover {
-            background-color: #43A047;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            margin-left: 15px;
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        #hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            background: url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center/cover;
-            position: relative;
-            color: var(--secondary-color);
-        }
-
-        #hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .hero-content p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
-
-        .hero-highlights {
-            display: flex;
-            margin-bottom: 40px;
-        }
-
-        .hero-highlight {
-            display: flex;
-            align-items: center;
-            margin-right: 30px;
-        }
-
-        .hero-highlight i {
-            color: var(--primary-color);
-            margin-right: 10px;
-            font-size: 24px;
-        }
-
-        /* About Section */
-        #about {
-            padding: 100px 0;
-            background-color: var(--secondary-color);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 36px;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .about-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-            padding-right: 40px;
-        }
-
-        .about-text h3 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-
-        .about-text p {
-            margin-bottom: 20px;
-        }
-
-        .about-image {
-            flex: 1;
-            min-width: 300px;
+            background: var(--secondary-color);
             display: flex;
             justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
         }
 
-        .about-image img {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(76, 175, 80, 0.3);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        /* Products Section */
-        #products {
-            padding: 100px 0;
-            background-color: var(--light-gray);
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
+        /* Navbar Animations */
+        .navbar {
+            transition: all var(--transition-time) ease-out;
         }
 
+        .navbar.scrolled {
+            box-shadow: 0 4px 10px var(--light-shadow);
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width var(--transition-time) ease-out;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section Animations */
+        .hero {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .hero-subtitle {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        .hero-image {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Scroll Reveal Animations */
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Product Card Animations */
         .product-card {
-            background-color: var(--secondary-color);
-            border-radius: 10px;
-            padding: 30px 20px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            transition: all var(--transition-time) ease-out;
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.2);
         }
 
-        .product-card i {
-            font-size: 40px;
+        /* Button Animations */
+        .btn {
+            transition: all var(--transition-time) ease-out;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Footer Animations */
+        .footer-link {
+            transition: all 0.3s ease-out;
+        }
+
+        .footer-link:hover {
             color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .product-card h3 {
-            margin-bottom: 15px;
-        }
-
-        .product-card p {
-            margin-bottom: 20px;
-        }
-
-        /* Services Section */
-        #services {
-            padding: 100px 0;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background-color: var(--secondary-color);
-            border-radius: 10px;
-            padding: 30px 20px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .service-card i {
-            font-size: 40px;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .service-card h3 {
-            margin-bottom: 15px;
-        }
-
-        .service-card p {
-            margin-bottom: 20px;
-        }
-
-        /* Why Choose Us Section */
-        #why-choose-us {
-            padding: 100px 0;
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .benefit-card {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 30px 20px;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .benefit-card i {
-            font-size: 40px;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-        }
-
-        .benefit-card h3 {
-            margin-bottom: 15px;
-        }
-
-        /* Solar Benefits Section */
-        #solar-benefits {
-            padding: 100px 0;
-            background-color: var(--light-gray);
-        }
-
-        .solar-benefits-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .solar-benefits-text {
-            flex: 1;
-            min-width: 300px;
-            padding-right: 40px;
-        }
-
-        .solar-benefits-text h3 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-
-        .solar-benefits-list {
-            margin-bottom: 20px;
-        }
-
-        .solar-benefits-list li {
-            margin-bottom: 10px;
-            list-style-type: none;
-            display: flex;
-            align-items: center;
-        }
-
-        .solar-benefits-list i {
-            color: var(--primary-color);
-            margin-right: 10px;
-        }
-
-        .solar-benefits-image {
-            flex: 1;
-            min-width: 300px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .solar-benefits-image img {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-        }
-
-        /* Call to Action Section */
-        #cta {
-            padding: 100px 0;
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            text-align: center;
-        }
-
-        #cta h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        #cta p {
-            margin-bottom: 30px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Contact Section */
-        #contact {
-            padding: 100px 0;
-            background-color: var(--secondary-color);
-        }
-
-        .contact-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        .contact-form {
-            flex: 1;
-            min-width: 300px;
-            padding-right: 40px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .contact-info {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .contact-item {
-            display: flex;
-            margin-bottom: 20px;
-        }
-
-        .contact-item i {
-            font-size: 24px;
-            color: var(--primary-color);
-            margin-right: 15px;
-        }
-
-        /* Footer */
-        footer {
-            padding: 50px 0 20px;
-            background-color: var(--text-color);
-            color: var(--secondary-color);
-        }
-
-        .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-bottom: 40px;
-        }
-
-        .footer-about {
-            flex: 1;
-            min-width: 300px;
-            margin-bottom: 30px;
-        }
-
-        .footer-logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .footer-links {
-            flex: 1;
-            min-width: 150px;
-            margin-bottom: 30px;
-        }
-
-        .footer-links h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--secondary-color);
-        }
-
-        .footer-contact {
-            flex: 1;
-            min-width: 300px;
-            margin-bottom: 30px;
-        }
-
-        .footer-contact h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .social-links {
-            display: flex;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            margin-right: 10px;
-            color: var(--secondary-color);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            background-color: var(--primary-color);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero-content h1 {
-                font-size: 36px;
-            }
-
-            .about-content, .solar-benefits-content, .contact-content {
-                flex-direction: column;
-            }
-
-            .about-text, .about-image, .solar-benefits-text, .solar-benefits-image, .contact-form, .contact-info {
-                padding-right: 0;
-                margin-bottom: 30px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="container nav-container">
-            <a href="#" class="logo">CATCO Energy Solutions</a>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#solar-benefits">Why Solar?</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#" class="btn btn-primary">Get a Quote</a></li>
-            </ul>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">CATCO</a>
+            <div class="nav-links">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Products</a>
+                <a href="#" class="nav-link">Services</a>
+                <a href="#" class="nav-link">About</a>
+                <a href="#" class="nav-link">Contact</a>
+                <button class="btn">Get a Quote</button>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero">
-        <div class="container hero-content">
-            <h1>Sustainable Energy. Smarter Tomorrow.</h1>
-            <p>Power your home or business with reliable solar energy and advanced inverter solutions from CATCO Energy Solutions.</p>
-            <div class="hero-highlights">
-                <div class="hero-highlight">
-                    <i class="fas fa-bolt"></i>
-                    <span>High Efficiency</span>
-                </div>
-                <div class="hero-highlight">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Reliable Products</span>
-                </div>
-                <div class="hero-highlight">
-                    <i class="fas fa-tools"></i>
-                    <span>Expert Installation</span>
-                </div>
+    <section class="hero">
+        <div class="container">
+            <h1>Renewable Energy Solutions</h1>
+            <p class="hero-subtitle">Sustainable and efficient energy for a greener future</p>
+            <div class="cta-buttons">
+                <button class="btn">Learn More</button>
+                <button class="btn">Contact Us</button>
             </div>
-            <div>
-                <a href="#products" class="btn btn-primary">Explore Solutions</a>
-                <a href="#contact" class="btn btn-secondary">Contact Us</a>
-            </div>
+            <img src="solar-panel.png" alt="Solar Panels" class="hero-image">
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about">
+    <section class="about section-hidden">
         <div class="container">
-            <div class="section-title">
-                <h2>Powering a Brighter Future with Clean Energy</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>About CATCO Energy Solutions</h3>
-                    <p>CATCO Energy Solutions helps customers reduce electricity costs and adopt reliable, sustainable energy solutions through solar power systems and advanced inverter technology.</p>
-                    <p>We provide professional installation, customized solar solutions, quality products, and customer-focused support to ensure your transition to clean energy is seamless and beneficial.</p>
-                    <a href="#" class="btn btn-primary">Learn More About Us</a>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Solar panels installation">
-                </div>
-            </div>
+            <h2>About Us</h2>
+            <p>We are committed to providing sustainable energy solutions...</p>
         </div>
     </section>
 
     <!-- Products Section -->
-    <section id="products">
+    <section class="products section-hidden">
         <div class="container">
-            <div class="section-title">
-                <h2>Our Premium Products</h2>
-            </div>
-            <div class="products-grid">
+            <h2>Our Products</h2>
+            <div class="product-grid">
                 <div class="product-card">
-                    <i class="fas fa-solar-panel"></i>
                     <h3>Solar Panels</h3>
-                    <p>High-efficiency solar panels designed for maximum energy production and durability.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
+                    <p>High-efficiency solar panels...</p>
                 </div>
                 <div class="product-card">
-                    <i class="fas fa-plug"></i>
-                    <h3>Solar Inverters</h3>
-                    <p>Advanced inverters that convert solar energy efficiently for your home or business.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
-                </div>
-                <div class="product-card">
-                    <i class="fas fa-exchange-alt"></i>
-                    <h3>Hybrid Inverters</h3>
-                    <p>Versatile inverters that can switch between grid, battery, and solar power.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
-                </div>
-                <div class="product-card">
-                    <i class="fas fa-home"></i>
-                    <h3>On-Grid Solar Systems</h3>
-                    <p>Grid-tied solar systems that reduce your electricity bills and carbon footprint.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
-                </div>
-                <div class="product-card">
-                    <i class="fas fa-car-battery"></i>
-                    <h3>Off-Grid Solar Systems</h3>
-                    <p>Complete energy independence with our off-grid solar power solutions.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Professional Services</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-solar-panel"></i>
-                    <h3>Solar System Installation</h3>
-                    <p>Professional installation of solar panels and full system setup by certified technicians.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-plug"></i>
-                    <h3>Inverter Installation</h3>
-                    <p>Expert installation and configuration of solar inverters for optimal performance.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-tools"></i>
-                    <h3>System Maintenance</h3>
-                    <p>Regular maintenance and check-ups to keep your solar system running efficiently.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-lightbulb"></i>
-                    <h3>Energy Consultation</h3>
-                    <p>Professional advice and planning for your solar energy needs and savings.</p>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Choose Us Section -->
-    <section id="why-choose-us">
-        <div class="container">
-            <div class="section-title">
-                <h2>Why Choose CATCO Energy Solutions?</h2>
-            </div>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Reliable & High-Quality Products</h3>
-                    <p>We use only the highest quality solar products from trusted manufacturers.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-dollar-sign"></i>
-                    <h3>Energy Cost Savings</h3>
-                    <p>Significantly reduce your electricity bills with our efficient solar solutions.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-user-tie"></i>
-                    <h3>Professional Installation</h3>
-                    <p>Our certified installers ensure your system is set up correctly and safely.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-headset"></i>
-                    <h3>Long-Term Customer Support</h3>
-                    <p>We provide ongoing support and maintenance for all our installations.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Solar Benefits Section -->
-    <section id="solar-benefits">
-        <div class="container">
-            <div class="section-title">
-                <h2>The Benefits of Solar Energy</h2>
-            </div>
-            <div class="solar-benefits-content">
-                <div class="solar-benefits-text">
-                    <h3>Why Go Solar?</h3>
-                    <ul class="solar-benefits-list">
-                        <li><i class="fas fa-check"></i> Reduce Electricity Bills</li>
-                        <li><i class="fas fa-check"></i> Clean Renewable Energy</li>
-                        <li><i class="fas fa-check"></i> Energy Independence</li>
-                        <li><i class="fas fa-check"></i> Long-Term Savings</li>
-                    </ul>
-                    <p>Switching to solar energy is one of the smartest investments you can make for your home or business. Not only does it help you save money, but it also contributes to a cleaner environment.</p>
-                </div>
-                <div class="solar-benefits-image">
-                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Solar panel benefits">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action Section -->
-    <section id="cta">
-        <div class="container">
-            <h2>Ready to Switch to Smarter Energy?</h2>
-            <p>Let CATCO Energy Solutions help you find the right solar and inverter solution for your energy needs.</p>
-            <div>
-                <a href="#contact" class="btn btn-secondary">Get a Free Quote</a>
-                <a href="#contact" class="btn btn-primary">Contact Us</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contact Us</h2>
-            </div>
-            <div class="contact-content">
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" placeholder="Your Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="Your Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" placeholder="Your Phone">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" placeholder="Your Message" rows="5"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Enquiry</button>
-                    </form>
-                </div>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h3>Phone</h3>
-                            <p>+1 (800) 123-4567</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h3>Email</h3>
-                            <p>info@catcoenergy.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h3>Location</h3>
-                            <p>123 Solar Street, Green City, CA 12345</p>
-                        </div>
-                    </div>
+                    <h3>Battery Storage</h3>
+                    <p>Reliable energy storage solutions...</p>
                 </div>
             </div>
         </div>
@@ -840,62 +215,49 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <div class="footer-logo">CATCO Energy Solutions</div>
-                    <p>Powering a brighter future with reliable, clean energy solutions for homes and businesses.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#products">Products</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h3>Products</h3>
-                    <ul>
-                        <li><a href="#">Solar Panels</a></li>
-                        <li><a href="#">Solar Inverters</a></li>
-                        <li><a href="#">Hybrid Inverters</a></li>
-                        <li><a href="#">On-Grid Systems</a></li>
-                        <li><a href="#">Off-Grid Systems</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h3>Contact Info</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Solar Street, Green City, CA 12345</p>
-                    <p><i class="fas fa-phone"></i> +1 (800) 123-4567</p>
-                    <p><i class="fas fa-envelope"></i> info@catcoenergy.com</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 CATCO Energy Solutions. All Rights Reserved.</p>
+            <p>&copy; 2023 CATCO Energy Solutions</p>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        // Loader Animation
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.loader').style.opacity = '0';
+                setTimeout(function() {
+                    document.querySelector('.loader').style.display = 'none';
+                }, 500);
+            }, 1000);
         });
 
-        // Mobile menu toggle functionality could be added here
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Reveal Animation
+        const sections = document.querySelectorAll('.section-hidden');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
     </script>
 </body>
 </html>
